@@ -4,7 +4,7 @@
             <div class="flex items-center md:order-2">
                 <div class="container flex flex-wrap items-center justify-between mx-auto">
                     <a href="/" class="flex items-center">
-                        <img src="https://images.nintendolife.com/3cc5ada6e2600/you-know-his-name.large.jpg" class="h-6 mr-3 sm:h-9" alt="Flowbite Logo" />
+                        <img src="https://images.nintendolife.com/3cc5ada6e2600/you-know-his-name.large.jpg" class="h-6 mr-3 sm:h-9" alt="Logo" />
                         <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">cronosKart</span>
                     </a>
                     <div class="flex items-center md:order-2">
@@ -78,30 +78,25 @@
                     <template v-slot:activator="{ on, attrs }">
                         <button v-bind="attrs" v-on="on" type="button" class="mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
                             <span class="sr-only">Open user menu</span>
-                            <img class="w-8 h-8 rounded-full" src="https://static.vecteezy.com/system/resources/thumbnails/005/544/718/small/profile-icon-design-free-vector.jpg" alt="user photo">
+                            <img class="w-8 h-8 rounded-full" :src=loginInfo[3] alt="user photo">
                         </button>
                     </template>
                     <div class="px-4 py-3">
-                        <span class="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
-                        <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
+                        <span class="block text-sm text-gray-900 dark:text-white">{{ loginInfo[1] }}</span>
+                        <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">{{ visibleWallet }}</span>
                     </div>
-                    <ul class="py-2" aria-labelledby="user-menu-button">
-                        <li>
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
-                        </li>
-                        <li>
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
-                        </li>
-                        <li>
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Earnings</a>
-                        </li>
-                        <li>
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
-                        </li>
-                    </ul>
                     <v-list>
-                        <v-list-item v-for="(item, index) in items" :key="index">
-                        <v-list-item-title><a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a></v-list-item-title>
+                        <v-list-item>
+                            <v-list-item-title><a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a></v-list-item-title>
+                        </v-list-item>
+                        <v-list-item>
+                            <v-list-item-title><a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Earnings</a></v-list-item-title>
+                        </v-list-item>
+                        <v-list-item>
+                            <v-list-item-title><a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a></v-list-item-title>
+                        </v-list-item>
+                        <v-list-item>
+                            <v-list-item-title @click="logoutUser"><a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a></v-list-item-title>
                         </v-list-item>
                     </v-list>
                 </v-menu>
@@ -115,14 +110,26 @@ export default {
     name: "navbar",
 
     data: () => ({
+        loginInfo: '',
+        visibleWallet: '',
     }),
 
     created() {
-
+        if($cookies.isKey('loginToken') == true){
+            this.loginInfo = $cookies.get('loginToken')
+            var length = this.loginInfo[2].length
+            var endLength = length - 4;
+            var part1 = this.loginInfo[2].substring(0,4)
+            var part2 = this.loginInfo[2].substring(endLength, length);
+            this.visibleWallet = part1 + '...' + part2;
+        }
     },
 
     methods: {
-
+        logoutUser(){
+            $cookies.remove('loginToken')
+            location.replace('/');
+        },
     },
 
     props: {

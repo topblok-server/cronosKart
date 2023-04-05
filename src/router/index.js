@@ -45,6 +45,13 @@ const routes = [
       return import('../views/KartView.vue')
     }
   },
+  {
+    path: '/account/signup',
+    name: 'account - signup',
+    component: function () {
+      return import('../views/SignupView.vue')
+    }
+  },
 ]
 
 const router = new VueRouter({
