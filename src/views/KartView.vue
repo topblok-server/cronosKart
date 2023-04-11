@@ -6,7 +6,7 @@
         <v-row align="center" justify="center">
             <div id="kartCard" class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <a href="#">
-                    <img id="kartImg" class="rounded-t-lg" src="https://i.ibb.co/TLFXzmM/1.png" alt="" />
+                    <img id="kartImg" class="rounded-t-lg" src="https://i.ibb.co/TPbWQqQ/kart1.png" alt="" />
                 </a>
                 <div class="p-5">
                     <a href="#">
@@ -22,7 +22,7 @@
 
             <div id="kartCard" class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <a href="#">
-                    <img id="kartImg" class="rounded-t-lg" src="https://i.ibb.co/44pCy0k/2.png" alt="" />
+                    <img id="kartImg" class="rounded-t-lg" src="https://i.ibb.co/4N2ndMF/Untitled-design.png" alt="" />
                 </a>
                 <div class="p-5">
                     <a href="#">
